@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitConfig {
 
-    private const val BASE_URL = "https://6060fd02ac47190017a70602.mockapi.io/api/"
+    private const val BASE_URL = "http://staging.kinedu.com/"
 
     private val retrofit: Retrofit by lazy {
         val client = OkHttpClient.Builder()
@@ -24,5 +24,9 @@ object RetrofitConfig {
 
     val apiService : ApiService by lazy {
         retrofit.create(ApiService::class.java)
+    }
+
+    val activityService: ActivityService by lazy {
+        retrofit.create(ActivityService::class.java)
     }
 }

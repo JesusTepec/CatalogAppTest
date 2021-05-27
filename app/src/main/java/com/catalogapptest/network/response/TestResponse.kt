@@ -1,4 +1,4 @@
-package com.catalogapptest.model
+package com.catalogapptest.network.response
 
 import com.google.gson.annotations.SerializedName
 

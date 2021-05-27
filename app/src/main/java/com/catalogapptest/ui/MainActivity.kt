@@ -1,10 +1,9 @@
-package com.catalogapptest
+package com.catalogapptest.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import com.catalogapptest.R
 import com.catalogapptest.databinding.ActivityMainBinding
 import com.catalogapptest.viewmodel.MainViewModel
 import timber.log.Timber
@@ -25,8 +24,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-        viewModel.testRequest().observe(this, {
-            binding.codeOperation.text = it
-        })
+        viewModel.getActivities()
     }
 }

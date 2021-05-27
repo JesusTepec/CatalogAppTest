@@ -1,6 +1,6 @@
 package com.catalogapptest.repository
 
-import com.catalogapptest.model.TestResponse
+import com.catalogapptest.network.response.TestResponse
 import com.catalogapptest.network.ApiService
 import com.catalogapptest.network.RetrofitConfig
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

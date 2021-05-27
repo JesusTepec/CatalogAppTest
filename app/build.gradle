@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.catalogapptest"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -63,4 +63,7 @@ dependencies {
 
     // LiveData
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+
+    //EASY PREFRENCES
+    implementation 'com.pixplicity.easyprefs:library:1.9.0'
 }

@@ -2,8 +2,12 @@ package com.catalogapptest.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.catalogapptest.model.TestResponse
-import com.catalogapptest.repository.TestRepository
+import com.catalogapptest.KEY_TOKEN
+import com.catalogapptest.TOKEN
+import com.catalogapptest.model.Activity
+import com.catalogapptest.network.response.ActivitiesResponse
+import com.catalogapptest.repository.ActivityRespository
+import com.pixplicity.easyprefs.library.Prefs
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import timber.log.Timber
@@ -11,24 +15,20 @@ import timber.log.Timber
 class MainViewModel : ViewModel() {
 
     private val disposables = CompositeDisposable()
-    private val repository = TestRepository()
+    private val repository = ActivityRespository()
+
     init {
         Timber.tag(this.javaClass.simpleName)
+        Prefs.putString(KEY_TOKEN, TOKEN)
     }
 
-    fun testRequest(): MutableLiveData<String> {
-        val liveDataResponse = MutableLiveData<String>()
+    fun getActivities(): MutableLiveData<List<Activity>> {
+        val liveDataResponse = MutableLiveData<List<Activity>>()
         disposables.add(
-            repository.test()
-                .subscribeWith(object: DisposableSingleObserver<List<TestResponse>>() {
-                    override fun onSuccess(response: List<TestResponse>) {
-                        if(response.isNotEmpty()) {
-                            var ids = ""
-                            for (item in response) {
-                                ids += item.idOperation + "-"
-                            }
-                            liveDataResponse.postValue(ids)
-                        }
+            repository.getActivities(getToken())
+                .subscribeWith(object : DisposableSingleObserver<ActivitiesResponse>() {
+                    override fun onSuccess(response: ActivitiesResponse) {
+                        liveDataResponse.postValue(response.data.activities)
                     }
 
                     override fun onError(e: Throwable) {
@@ -37,6 +37,10 @@ class MainViewModel : ViewModel() {
                 })
         )
         return liveDataResponse
+    }
+
+    private fun getToken(): String {
+        return Prefs.getString(KEY_TOKEN, "")
     }
 
 }
