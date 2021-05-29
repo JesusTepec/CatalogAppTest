@@ -22,11 +22,11 @@ object RetrofitConfig {
             .build()
     }
 
-    val apiService : ApiService by lazy {
-        retrofit.create(ApiService::class.java)
-    }
-
     val activityService: ActivityService by lazy {
         retrofit.create(ActivityService::class.java)
+    }
+
+    val articleService: ArticleService by lazy {
+        retrofit.create(ArticleService::class.java)
     }
 }

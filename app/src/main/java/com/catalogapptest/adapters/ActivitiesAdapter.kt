@@ -10,45 +10,38 @@ import java.util.*
 
 
 class ActivitiesAdapter(private val mContext: Context, mList: ArrayList<Activity>) :
-    RecyclerView.Adapter<ActivitiesAdapter.MovieViewHolder>() {
+    RecyclerView.Adapter<ActivitiesAdapter.CustomViewHolder>() {
 
-    private var movieList: ArrayList<Activity>
+    private var activityList: ArrayList<Activity>
 
     init {
-        this.movieList = mList
+        this.activityList = mList
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val inflater = LayoutInflater.from(mContext)
         val binding = ItemActivityListBinding.inflate(inflater, parent, false)
-
-        return MovieViewHolder(binding)
+        return CustomViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.itemBinding.activity = movieList[position]
-
-        /*
-        val url = "http://image.tmdb.org/t/p/w500${movieList[position].posterPath}"
-        Glide.with(mContext).load(url)
-            .into(holder.itemBinding.posterImage)
-         */
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+        holder.itemBinding.activity = activityList[position]
     }
 
     override fun getItemCount(): Int {
-        return movieList.size
+        return activityList.size
     }
 
     fun updateList(updatedList: ArrayList<Activity>) {
-        movieList = updatedList
+        activityList = updatedList
         notifyDataSetChanged()
     }
 
     fun getItemAt(position: Int): Activity {
-        return movieList[position]
+        return activityList[position]
     }
 
-    inner class MovieViewHolder(
+    inner class CustomViewHolder(
         val itemBinding: ItemActivityListBinding
     ) : RecyclerView.ViewHolder(itemBinding.root)
 

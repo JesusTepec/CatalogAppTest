@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="activity"
-            type="com.catalogapptest.model.Activity" />
+            name="article"
+            type="com.catalogapptest.model.Article" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -36,46 +36,47 @@
 
                     <ImageView
                         android:id="@+id/img_thumbnail"
-                        imageUrl="@{activity.thumbnail}"
+                        imageUrl="@{article.picture}"
                         android:layout_width="150dp"
                         android:layout_height="100dp"
-                        android:contentDescription="@{activity.name}" />
+                        android:contentDescription="@{article.name}" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/txt_article_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{activity.name}"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     android:layout_marginStart="@dimen/margin_start_text_card"
+                    android:text="@{article.name}"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/card_picture"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txt_activity_age_group"
+                    android:id="@+id/txt_article_age"
+                    maxAge="@{article.maxAge}"
+                    minAge="@{article.minAge}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{activity.ageGroup}"
-                    android:textColor="@color/blue_green"
+                    android:layout_marginStart="@dimen/margin_start_text_card"
+                    android:textColor="@color/pink_emmet"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:layout_marginStart="@dimen/margin_start_text_card"
                     app:layout_constraintStart_toEndOf="@id/card_picture"
                     app:layout_constraintTop_toBottomOf="@id/txt_article_name" />
 
                 <TextView
-                    android:id="@+id/txt_activity_purpose"
+                    android:id="@+id/txt_article_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{activity.purpose}"
-                    android:textSize="12sp"
-                    android:layout_marginTop="20dp"
-                    android:textColor="@color/gray_text"
                     android:layout_marginStart="@dimen/margin_start_text_card"
+                    android:text="@{article.shortDescription}"
+                    android:textColor="@color/gray_text"
+                    android:layout_marginTop="6dp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/card_picture"
-                    app:layout_constraintTop_toBottomOf="@id/txt_activity_age_group" />
+                    app:layout_constraintTop_toBottomOf="@id/txt_article_age" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

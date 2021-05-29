@@ -9,6 +9,8 @@ import timber.log.Timber.DebugTree
 
 class CatalogApp : Application() {
 
+    // val appComponent = DaggerAppComponent.create()
+
     init {
         instance = this
     }
@@ -18,6 +20,7 @@ class CatalogApp : Application() {
         applicationContext()
         initTimber()
         initPrefs()
+        fillPrefs()
     }
 
     private fun initTimber() {
@@ -32,6 +35,12 @@ class CatalogApp : Application() {
             .setPrefsName(packageName)
             .setUseDefaultSharedPreference(true)
             .build()
+    }
+
+    private fun fillPrefs() {
+        Prefs.putString(KEY_TOKEN, TOKEN)
+        Prefs.putInt(KEY_SKILL_ID, SKILL_ID)
+        Prefs.putInt(KEY_BABY_ID, BABY_ID)
     }
 
     companion object {

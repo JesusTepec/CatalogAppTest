@@ -32,6 +32,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Util for replace fragments
+     */
     private fun replaceFragment(nameFragment: String) {
         val fragment = fragmentsFactory(nameFragment)
         val transaction = supportFragmentManager.beginTransaction()
@@ -39,6 +42,9 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null).commit()
     }
 
+    /**
+     * Factory fragments of this activity
+     */
     private fun fragmentsFactory(fragmentName: String): Fragment {
         return when(fragmentName) {
             NAME_FRAGMENT_ACTIVITIES -> ActivitiesFragment()

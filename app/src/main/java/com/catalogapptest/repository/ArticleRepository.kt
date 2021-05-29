@@ -1,19 +1,19 @@
 package com.catalogapptest.repository
 
-import com.catalogapptest.network.response.ActivitiesResponse
 import com.catalogapptest.network.RetrofitConfig
+import com.catalogapptest.network.response.ArticlesResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
-class ActivityRespository @Inject constructor() {
+class ArticleRepository @Inject constructor() {
 
-    //todo: provide with dagger
-    private var activityService = RetrofitConfig.activityService
+    //Todo: provide with dagger
+    private var articleService = RetrofitConfig.articleService
 
-    fun getActivities(token: String): Single<ActivitiesResponse> {
-        return activityService.list(token, 5, 2064732)
+    fun getArticles(token: String, skillId: Int, babyId: Int): Single<ArticlesResponse> {
+        return articleService.list(token, skillId, babyId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }

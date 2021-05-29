@@ -6,27 +6,28 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.catalogapptest.KEY_TOKEN
 import com.catalogapptest.TOKEN
+import com.catalogapptest.di.DaggerAppComponent
 import com.catalogapptest.model.Activity
 import com.catalogapptest.network.response.ActivitiesResponse
 import com.catalogapptest.repository.ActivityRespository
 import com.pixplicity.easyprefs.library.Prefs
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import timber.log.Timber
+import javax.inject.Inject
 
 class ActivitiesViewModel : ViewModel() {
 
-    private val repository = ActivityRespository()
+    @Inject lateinit var repository: ActivityRespository
 
     var loading: ObservableField<Int> = ObservableField()
 
     init {
         loading.set(View.GONE)
+        DaggerAppComponent.create().inject(this)
     }
 
     init {
         Timber.tag(this.javaClass.simpleName)
-        Prefs.putString(KEY_TOKEN, TOKEN)
     }
 
     fun getActivities(): MutableLiveData<List<Activity>?> {
