@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.catalogapptest.databinding.ItemActivityListBinding
 import com.catalogapptest.model.Activity
+import com.catalogapptest.ui.listeners.ItemListener
 import java.util.*
 
 
-class ActivitiesAdapter(private val mContext: Context, mList: ArrayList<Activity>) :
+class ActivitiesAdapter(private val mContext: Context, mList: ArrayList<Activity>, private val listener: ItemListener) :
     RecyclerView.Adapter<ActivitiesAdapter.CustomViewHolder>() {
 
     private var activityList: ArrayList<Activity>
@@ -26,6 +27,9 @@ class ActivitiesAdapter(private val mContext: Context, mList: ArrayList<Activity
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.itemBinding.activity = activityList[position]
+        holder.itemView.setOnClickListener {
+            listener.onClick(activityList[position], it, position)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -65,7 +65,7 @@ class ArticlesFragment : Fragment(), ItemListener {
     }
 
     override fun onClick(model: Any?, view: View, position: Int) {
-        val detailsFragment = DetailsFragment.newInstance((model as Article).id)
+        val detailsFragment = ArticlesDetailFragment.newInstance((model as Article).id)
         activity?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.parentContainer, detailsFragment, "details_fragment")?.addToBackStack(null)
             ?.commit()

@@ -3,6 +3,7 @@ package com.catalogapptest.model
 import com.google.gson.annotations.SerializedName
 
 data class Activity(
+    var id: Long,
     var name: String,
     var age: Int,
     @SerializedName("age_group")
@@ -16,6 +17,7 @@ data class Activity(
     @SerializedName("min_age")
     var minAge: Int,
     var purpose: String,
+    var description: String,
     var thumbnail: String,
     @SerializedName("active_milestones")
     var activeMilestones: Int,
@@ -23,5 +25,9 @@ data class Activity(
     var completedMilestones: Int,
     var locked: Boolean,
     @SerializedName("dap_lifes_checked")
-    var dapLifesChecked: Boolean
+    var dapLifesChecked: Boolean,
+    @SerializedName("embed_code")
+    var embedCode: String,
+@SerializedName("shareable_video_url")
+    var shareableVideoUrl: String
 )

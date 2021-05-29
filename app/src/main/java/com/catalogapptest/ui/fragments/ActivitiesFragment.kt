@@ -12,10 +12,12 @@ import com.catalogapptest.R
 import com.catalogapptest.adapters.ActivitiesAdapter
 import com.catalogapptest.databinding.FragmentActivitiesBinding
 import com.catalogapptest.model.Activity
+import com.catalogapptest.model.Article
+import com.catalogapptest.ui.listeners.ItemListener
 import com.catalogapptest.viewmodel.ActivitiesViewModel
 
 
-class ActivitiesFragment : Fragment() {
+class ActivitiesFragment : Fragment(), ItemListener {
 
     private lateinit var viewModel: ActivitiesViewModel
     private lateinit var binding: FragmentActivitiesBinding
@@ -54,8 +56,17 @@ class ActivitiesFragment : Fragment() {
     private fun initRecyclerView() {
         context?.let {
             binding.rvActivities.layoutManager = LinearLayoutManager(it)
-            adapter = ActivitiesAdapter(it, activityList)
+            adapter = ActivitiesAdapter(it, activityList, this)
             binding.rvActivities.adapter = adapter
         }
+    }
+
+    override fun onClick(model: Any?, view: View, position: Int) {
+        val activityModel = (model as Activity)
+        val detailsFragment = ActivitiesDetailFragment.newInstance(activityModel.id, activityModel.thumbnail)
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.parentContainer, detailsFragment, "details_fragment")
+            ?.addToBackStack(null)
+            ?.commit()
     }
 }

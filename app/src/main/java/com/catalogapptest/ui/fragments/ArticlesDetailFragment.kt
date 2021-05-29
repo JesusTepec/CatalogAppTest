@@ -4,21 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.MimeTypeMap
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.catalogapptest.R
-import com.catalogapptest.databinding.FragmentDetailsBinding
+import com.catalogapptest.databinding.FragmentDetailsArticleBinding
 import com.catalogapptest.viewmodel.ArticlesDetailViewModel
 
 
-class DetailsFragment : Fragment() {
+class ArticlesDetailFragment : Fragment() {
 
     private var articleID: Long? = null
 
     private lateinit var viewModel: ArticlesDetailViewModel
-    private lateinit var binding: FragmentDetailsBinding
+    private lateinit var binding: FragmentDetailsArticleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +28,7 @@ class DetailsFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_details_article, container, false)
         binding.viewModel = viewModel
         initData()
         return binding.root
@@ -49,7 +48,7 @@ class DetailsFragment : Fragment() {
 
         @JvmStatic
         fun newInstance(articleId: Long) =
-            DetailsFragment().apply {
+            ArticlesDetailFragment().apply {
                 arguments = Bundle().apply {
                     putLong(ARG_ARTICLE_ID, articleId)
                 }
