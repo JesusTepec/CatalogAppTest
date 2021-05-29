@@ -22,7 +22,7 @@ class ArticlesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.articles_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_articles, container, false)
     }
 
 }
