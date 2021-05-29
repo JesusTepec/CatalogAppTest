@@ -10,12 +10,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.catalogapptest.R
 import com.catalogapptest.adapters.ArticlesAdapter
-import com.catalogapptest.databinding.FragmentActivitiesBinding
 import com.catalogapptest.databinding.FragmentArticlesBinding
 import com.catalogapptest.model.Article
+import com.catalogapptest.ui.listeners.ItemListener
 import com.catalogapptest.viewmodel.ArticlesViewModel
 
-class ArticlesFragment : Fragment() {
+
+class ArticlesFragment : Fragment(), ItemListener {
 
     private lateinit var viewModel: ArticlesViewModel
     private lateinit var binding: FragmentArticlesBinding
@@ -28,7 +29,11 @@ class ArticlesFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ArticlesViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_articles, container, false)
         binding.viewModel = viewModel
         initRecyclerView()
@@ -40,7 +45,7 @@ class ArticlesFragment : Fragment() {
      * init for observables
      */
     private fun initData() {
-        viewModel.getArticles().observe(viewLifecycleOwner, {articles ->
+        viewModel.getArticles().observe(viewLifecycleOwner, { articles ->
             articles?.let {
                 articleList.addAll(it)
                 adapter.updateList(articleList)
@@ -54,9 +59,15 @@ class ArticlesFragment : Fragment() {
     private fun initRecyclerView() {
         context?.let {
             binding.rvArticles.layoutManager = LinearLayoutManager(it)
-            adapter = ArticlesAdapter(it, articleList)
+            adapter = ArticlesAdapter(it, articleList, this)
             binding.rvArticles.adapter = adapter
         }
     }
 
+    override fun onClick(model: Any?, view: View, position: Int) {
+        val detailsFragment = DetailsFragment.newInstance((model as Article).id)
+        activity?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.parentContainer, detailsFragment, "details_fragment")?.addToBackStack(null)
+            ?.commit()
+    }
 }

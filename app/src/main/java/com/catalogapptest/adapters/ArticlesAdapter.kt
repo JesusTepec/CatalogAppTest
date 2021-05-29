@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.catalogapptest.databinding.ItemArticleListBinding
 import com.catalogapptest.model.Article
+import com.catalogapptest.ui.listeners.ItemListener
 import java.util.*
 
 
-class ArticlesAdapter(private val mContext: Context, mList: ArrayList<Article>) :
+class ArticlesAdapter(private val mContext: Context, mList: ArrayList<Article>, private val listener: ItemListener) :
     RecyclerView.Adapter<ArticlesAdapter.CustomViewHolder>() {
 
     private var articleList: ArrayList<Article>
@@ -26,7 +27,9 @@ class ArticlesAdapter(private val mContext: Context, mList: ArrayList<Article>) 
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.itemBinding.article = articleList[position]
-
+        holder.itemView.setOnClickListener {
+            listener.onClick(articleList[position], it, position)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -38,9 +41,6 @@ class ArticlesAdapter(private val mContext: Context, mList: ArrayList<Article>) 
         notifyDataSetChanged()
     }
 
-    fun getItemAt(position: Int): Article {
-        return articleList[position]
-    }
 
     inner class CustomViewHolder(
         val itemBinding: ItemArticleListBinding

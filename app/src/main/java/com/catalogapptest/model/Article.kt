@@ -6,6 +6,7 @@ data class Article(
     var type: String,
     var id: Long,
     var name: String,
+    var title: String,
     @SerializedName("min_age")
     var minAge: Int,
     @SerializedName("max_age")
@@ -14,5 +15,6 @@ data class Article(
     @SerializedName("area_id")
     var areaId: Int,
     @SerializedName("short_description")
-    var shortDescription: String
+    var shortDescription: String,
+    var body: String
 )
